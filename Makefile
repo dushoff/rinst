@@ -23,7 +23,7 @@ copy:
 ## cp ubuntu.mk R.mk ##
 Sources += ubuntu.mk
 Ignore += R.mk
-include R.mk
+-include R.mk
 
 FORGE = http://R-Forge.R-project.org
 LME = http://lme4.r-forge.r-project.org/repos
