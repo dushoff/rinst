@@ -20,10 +20,10 @@ current: ggfortify.install rstanarm.install jtools.install DHARMa.install pwr.in
 copy:
 	/bin/cp -f Makefile ~/Dropbox/linux/home/R
 
-## cp ubuntu.mk R.mk
+## cp ubuntu.mk R.mk ##
 Sources += ubuntu.mk
 Ignore += R.mk
-include R.mk
+-include R.mk
 
 FORGE = http://R-Forge.R-project.org
 LME = http://lme4.r-forge.r-project.org/repos
