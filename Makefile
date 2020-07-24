@@ -44,6 +44,9 @@ Ignore += *.install *.nimble *.github *.bolker *.forge *.package
 %.install:
 	 echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRUE)' | $(R) --vanilla > $@
 
+%.fastinstall:
+	 echo 'install.packages("$*", repos = "$(MAINR)")' | $(R) --vanilla > $@
+
 %.nimble:
 	 echo 'install.packages("$*", repos = "$(NIMBLE)", type="source")' | $(R) --vanilla > $@
 
