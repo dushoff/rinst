@@ -15,7 +15,7 @@ vim_session:
 ###################################################################
 
 bleeding: broom.mixed.github
-current: ggfortify.install rstanarm.install jtools.install DHARMa.install pwr.install plot3D.install geomorph.install truncnorm.install epiDisplay.install animation.install rmutil.install EntropyEstimation.install furrr.install mobsim.install ismev.install PK.install nullabor.install stargazer.install sjPlot.install pgmm.install ggalt.install tabulizer.install sjPlot.install rattle.install LaCroixColoR.github googleVis.install gganimate.install ggmap.install sf.install geogrid.install gganimate.install tourr.install factoextra.install pheatmap.install glm2.install wesanderson.install andrews.install flextable.install arules.install ggraph.install cividis.github EMMIXskew.install gsheet.install gtrendsR.install factoextra.install av.install epigrowthfit.github roxygen2.install EpiEstim.install DEoptim.install mvbutils.install janitor.install expss.install diffeqr.install EnvStats.install surveillance.install shinyWidgets.install diagram.install rootSolve.install
+current: ggfortify.install rstanarm.install jtools.install DHARMa.install pwr.install plot3D.install geomorph.install truncnorm.install epiDisplay.install animation.install rmutil.install EntropyEstimation.install furrr.install mobsim.install ismev.install PK.install nullabor.install stargazer.install sjPlot.install pgmm.install ggalt.install tabulizer.install sjPlot.install rattle.install LaCroixColoR.github googleVis.install gganimate.install ggmap.install sf.install geogrid.install gganimate.install tourr.install factoextra.install pheatmap.install glm2.install wesanderson.install andrews.install flextable.install arules.install ggraph.install cividis.github EMMIXskew.install gsheet.install gtrendsR.install factoextra.install av.install epigrowthfit.github roxygen2.install EpiEstim.install DEoptim.install mvbutils.install janitor.install expss.install diffeqr.install EnvStats.install surveillance.install shinyWidgets.install diagram.install rootSolve.install rethinking.github
 
 copy:
 	/bin/cp -f Makefile ~/Dropbox/linux/home/R
@@ -68,6 +68,9 @@ broom.mixed.github bbmle.github bio3ss3.github fitsir.github: %.github: devtools
 # Other packages
 epigrowthfit.github: %.github: devtools.install
 	echo 'library(devtools); install_github("davidearn/$*")' | sudo $(R) --vanilla > $@ 
+
+rethinking.github: %.github: devtools.install
+	echo 'library(devtools); install_github("rmcelreath/$*")' | sudo $(R) --vanilla > $@ 
 
 ggstance.github: %.github: devtools.install
 	echo 'library(devtools); install_github("lionel-/$*")' | sudo $(R) --vanilla > $@ 
