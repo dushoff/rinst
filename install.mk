@@ -105,10 +105,6 @@ Phylogenetics.view:
 # rjags.install:
 	# env LD_LIBRARY_PATH=$(jags)/lib echo 'install.packages("rjags", configure.args="--with-jags-include=$(jags)/include/JAGS --with-jags-lib=$(jags)/lib --with-jags-modules=$(jags)/lib/JAGS/modules-2.2.0", type="source", repos = "$(MAINR)")' | $(R) --vanilla >& $@
 
-## Upgrade upgrade
-update.%:
-	 echo 'update.packages(repos = "$(MAINR)", ask=FALSE, checkBuilt=TRUE)' | $(R) --vanilla > $@
-
 %.forge:
 	 echo 'install.packages("$*", repos = "$(FORGE)")' | $(R) --vanilla > $@
 

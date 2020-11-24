@@ -77,9 +77,18 @@ Ignore += *.install
 
 ######################################################################
 
+## Dependencies
+
 devtools.source: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
 
-gir1.2-harfbuzz-0.0:
+######################################################################
+
+## See linux-config/log for upgrading
+## Upgrade updates
+
+Ignore += update.*
+update.%:
+	 echo 'update.packages(repos = "$(MAINR)", ask=FALSE, checkBuilt=TRUE)' | $(R) --vanilla > $@
 
 ######################################################################
 
