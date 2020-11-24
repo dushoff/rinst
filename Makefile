@@ -33,6 +33,10 @@ MAINR = $(CRAN)
 
 -include R.mk
 
+######################################################################
+
+Ignore += *.ppa *.apt *.source
+
 %.ppa: r-cran-%.apt ;
 
 aptrule = apt install -y $* | tee $*.apt
@@ -45,18 +49,26 @@ sourcerule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRU
 
 ######################################################################
 
-# Bolker packages
-broom.mixed.github bbmle.github bio3ss3.github fitsir.github: gituser=bbolker
+Ignore += *.github
 
 %.github:
 	echo 'library(devtools); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
 
 githubrule = $(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@
 
+######################################################################
+
+## Work on modularizing
+
+# Bolker packages
+broom.mixed.github bbmle.github bio3ss3.github fitsir.github: gituser=bbolker
+
 bbmle.install: 
 	$(githubrule) || ($(RM) $*.github && false)
 
 ######################################################################
+
+Ignore += *.install
 
 %.install:
 	($(MAKE) $*.ppa && $(MV) $*.apt $@) \
