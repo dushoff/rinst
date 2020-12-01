@@ -10,6 +10,8 @@ vim_session:
 
 ######################################################################
 
+current: zoo.ppa
+
 # It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
 
 ## Old Makefile
@@ -52,7 +54,7 @@ sourcerule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRU
 Ignore += *.github
 
 %.github:
-	echo 'library(devtools); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
+	echo 'library(remote); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
 
 githubrule = $(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@
 
