@@ -1,4 +1,4 @@
-## This is 
+## This is rinst
 
 -include target.mk
 all: target
@@ -15,7 +15,9 @@ current: zoo.ppa
 # It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
 
 ## Old Makefile
-Sources += install.mk
+Sources += install.mk paths.mk
+
+Ignore += *.tmp
 
 ######################################################################
 
@@ -54,9 +56,10 @@ sourcerule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRU
 Ignore += *.github
 
 %.github:
-	echo 'library(remote); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
+	echo 'library(remotes); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
 
-githubrule = $(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@
+githubrule = ($(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@) \
+	|| ($(RM) $*.github && false)
 
 ######################################################################
 
@@ -66,9 +69,13 @@ githubrule = $(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@
 broom.mixed.github bbmle.github bio3ss3.github fitsir.github: gituser=bbolker
 
 bbmle.install: 
-	$(githubrule) || ($(RM) $*.github && false)
+	$(githubrule)
 
 ######################################################################
+
+ici3d-pkg.github: gituser=ICI3D
+ici3d-pkg.install:
+	$(githubrule)
 
 Ignore += *.install
 
