@@ -10,7 +10,7 @@ vim_session:
 
 ######################################################################
 
-current: zoo.ppa
+current: glmmTMB_extend.github
 
 # It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
 
@@ -61,6 +61,7 @@ Ignore += *.github
 githubrule = ($(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@) \
 	|| ($(RM) $*.github && false)
 
+
 ######################################################################
 
 ## Work on modularizing
@@ -76,6 +77,18 @@ bbmle.install:
 ici3d-pkg.github: gituser=ICI3D
 ici3d-pkg.install:
 	$(githubrule)
+
+######################################################################
+
+## Special extension from Steve
+
+glmmTMB_extend.github:
+	echo 'library(remotes);install_github("glmmTMB/glmmTMB/glmmTMB@extend_emmeans")' | $(R) --vanilla | tee $@ 
+
+glmmTMB_extend.install:
+	$(githubrule)
+
+######################################################################
 
 Ignore += *.install
 
