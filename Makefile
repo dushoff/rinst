@@ -69,6 +69,9 @@ broom.mixed.github bbmle.github bio3ss3.github fitsir.github: %.github: devtools
 epigrowthfit.github: %.github: devtools.install
 	echo 'library(devtools); install_github("davidearn/$*")' | sudo $(R) --vanilla > $@ 
 
+rRlinks.github: %.github: devtools.install
+	echo 'library(devtools); install_github("mac-theobio/$*")' | sudo $(R) --vanilla > $@ 
+
 ggstance.github: %.github: devtools.install
 	echo 'library(devtools); install_github("lionel-/$*")' | sudo $(R) --vanilla > $@ 
 
