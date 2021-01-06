@@ -58,11 +58,12 @@ Ignore += *.github
 %.github:
 	echo 'library(remotes); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
 
-rRlinks.github: %.github: devtools.install
-	echo 'library(devtools); install_github("mac-theobio/$*")' | sudo $(R) --vanilla > $@ 
+shellpipes.github: gituser=dushoff
 
-ggstance.github: %.github: devtools.install
-	echo 'library(devtools); install_github("lionel-/$*")' | sudo $(R) --vanilla > $@ 
+rRlinks.github: gituser=mac-theobio
+
+ggstance.github: %.github: remotes.install
+	echo 'library(remotes); install_github("lionel-/$*")' | sudo $(R) --vanilla > $@ 
 
 githubrule = ($(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@) \
 	|| ($(RM) $*.github && false)
