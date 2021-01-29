@@ -22,12 +22,6 @@ Ignore += *.install *.nimble *.github *.bolker *.forge *.package *.fastinstall
 %.nimble:
 	 echo 'install.packages("$*", repos = "$(NIMBLE)", type="source")' | $(R) --vanilla > $@
 
-bioconductor:
-	echo 'source("http://bioconductor.org/biocLite.R"); biocLite()' | $(R) --vanilla > $@
-
-%.bioconductor:
-	echo 'source("http://bioconductor.org/biocLite.R"); biocLite("$*")' | $(R) --vanilla > $@
-
 coin.install: devtools.install
 
 nimble.dev: %.dev: devtools.install

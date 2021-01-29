@@ -68,7 +68,6 @@ ggstance.github: %.github: remotes.install
 githubrule = ($(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@) \
 	|| ($(RM) $*.github && false)
 
-
 ######################################################################
 
 ## Work on modularizing
@@ -84,6 +83,14 @@ bbmle.install:
 ici3d-pkg.github: gituser=ICI3D
 ici3d-pkg.install:
 	$(githubrule)
+
+######################################################################
+
+bioconductor:
+	echo 'source("http://bioconductor.org/biocLite.R"); biocLite()' | $(R) --vanilla > $@
+
+%.bioconductor:
+	echo 'source("http://bioconductor.org/biocLite.R"); biocLite("$*")' | $(R) --vanilla > $@
 
 ######################################################################
 
