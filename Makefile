@@ -86,11 +86,11 @@ ici3d-pkg.install:
 
 ######################################################################
 
-bioconductor:
-	echo 'source("http://bioconductor.org/biocLite.R"); biocLite()' | $(R) --vanilla > $@
+bioconductor: BiocManager.install
+	echo 'BiocManager::install(version = "3.12")' | $(R) --vanilla > $@
 
-%.bioconductor:
-	echo 'source("http://bioconductor.org/biocLite.R"); biocLite("$*")' | $(R) --vanilla > $@
+%.bioconductor: bioconductor
+	echo 'BiocManager::install("$*")' | $(R) --vanilla > $@
 
 ######################################################################
 
@@ -116,6 +116,12 @@ Ignore += *.install
 ## Dependencies
 
 devtools.source: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
+
+######################################################################
+
+## Belatedly tracking what I'm installing 2021 Jan 30 (Sat)
+
+708: phyloseq.bioconductor microbiome.bioconductor
 
 ######################################################################
 
