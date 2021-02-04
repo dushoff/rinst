@@ -121,7 +121,7 @@ devtools.source: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
 
 ## Belatedly tracking what I'm installing 2021 Jan 30 (Sat)
 
-708: phyloseq.bioconductor microbiome.bioconductor
+708: phyloseq.bioconductor microbiome.bioconductor here.install asnipe.install plot.matrix.install filesstrings.install
 
 ######################################################################
 
