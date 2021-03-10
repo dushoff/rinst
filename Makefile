@@ -10,7 +10,7 @@ vim_session:
 
 ######################################################################
 
-current: glmmTMB_extend.github splitstackshape.install
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra
 
 # It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
 
