@@ -35,7 +35,8 @@ MAINR = $(CRAN)
 
 ######################################################################
 
-Sources += R.mk
+## Debian only; fancify later
+Ignore += R.mk
 -include R.mk
 
 ######################################################################
@@ -91,7 +92,7 @@ Ignore += bioconductor
 bioconductor: BiocManager.install
 	echo 'BiocManager::install(version = "3.12")' | $(R) --vanilla > $@
 
-Ignore += %.bioconductor
+Ignore += *.bioconductor
 %.bioconductor: bioconductor
 	echo 'BiocManager::install("$*")' | $(R) --vanilla > $@
 
