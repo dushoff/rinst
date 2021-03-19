@@ -35,6 +35,7 @@ MAINR = $(CRAN)
 
 ######################################################################
 
+Sources += R.mk
 -include R.mk
 
 ######################################################################
@@ -86,9 +87,11 @@ ici3d-pkg.install:
 
 ######################################################################
 
+Ignore += bioconductor
 bioconductor: BiocManager.install
 	echo 'BiocManager::install(version = "3.12")' | $(R) --vanilla > $@
 
+Ignore += %.bioconductor
 %.bioconductor: bioconductor
 	echo 'BiocManager::install("$*")' | $(R) --vanilla > $@
 
