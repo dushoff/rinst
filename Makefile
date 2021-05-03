@@ -121,6 +121,14 @@ Ignore += *.install
 
 devtools.source: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
 
+dotwhisker.install: broomExtra.install
+
+broomExtra.install: broom.install
+
+broom.install: slider.install
+
+slider.install: vctrs.install
+
 ######################################################################
 
 ## Belatedly tracking what I'm installing 2021 Jan 30 (Sat)
