@@ -1,7 +1,7 @@
 ## This is rinst
 
+all: current
 -include target.mk
-all: target
 
 # -include makestuff/perl.def
 
@@ -9,6 +9,8 @@ vim_session:
 	bash -cl "vmt"
 
 ######################################################################
+
+## See linux-config/log for upgrading. [Maybe 2021 Jun 10 (Thu)]
 
 current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install matlib.install kdensity.install
 
@@ -35,8 +37,6 @@ MAINR = $(CRAN)
 
 ######################################################################
 
-## Debian only; fancify later
-Ignore += R.mk
 -include R.mk
 
 ######################################################################
@@ -53,6 +53,10 @@ sourcerule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRU
 %.source:
 	 $(sourcerule)
 
+nsrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = FALSE)' | $(R) --vanilla | tee $*.source
+%.ns:
+	 $(nsrule)
+
 ######################################################################
 
 Ignore += *.github
@@ -61,6 +65,8 @@ Ignore += *.github
 	echo 'library(remotes); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
 
 shellpipes.github: gituser=dushoff
+
+ungeviz.github: gituser=wilkelab
 
 rRlinks.github: gituser=mac-theobio
 
@@ -88,11 +94,9 @@ ici3d-pkg.install:
 
 ######################################################################
 
-Ignore += bioconductor
 bioconductor: BiocManager.install
 	echo 'BiocManager::install(version = "3.12")' | $(R) --vanilla > $@
 
-Ignore += *.bioconductor
 %.bioconductor: bioconductor
 	echo 'BiocManager::install("$*")' | $(R) --vanilla > $@
 
@@ -121,6 +125,7 @@ Ignore += *.install
 
 devtools.source: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
 
+
 dotwhisker.install: broomExtra.install
 
 broomExtra.install: broom.install
@@ -128,6 +133,11 @@ broomExtra.install: broom.install
 broom.install: slider.install
 
 slider.install: vctrs.install
+
+gdtools.install: libcairo2-dev.apt
+
+sf.install: rgdal.install libudunits2-0.apt libudunits2-dev.apt
+rgdal.install: libgdal-dev.apt libproj-dev.apt
 
 ######################################################################
 
@@ -137,39 +147,42 @@ slider.install: vctrs.install
 
 ######################################################################
 
-## See linux-config/log for upgrading
-## Upgrade updates
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github
 
-Ignore += update.*
-update.%:
-	 echo 'update.packages(repos = "$(MAINR)", ask=FALSE, checkBuilt=TRUE)' | $(R) --vanilla > $@
+pcoxtime: doParallel.install foreach.install prodlim.install riskRegression.install PermAlgo.install pec.install RcppArmadillo.install
+
+# It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
+
+## Old Makefile
+Sources += install.mk paths.mk
+
+Ignore += *.tmp
 
 ######################################################################
 
 %.rmk:
-	/bin/rm -f $*
-	$(MAKE) $*
+	$(RM) $* 
+	$(MAKE) $* 
+
+MV = mv -f
 
 ######################################################################
 
-### Makestuff
+FORGE = http://R-Forge.R-project.org
+LME = http://lme4.r-forge.r-project.org/repos
+RSTAN = http://wiki.rstan-repo.googlecode.com/git/
+CRAN = http://lib.stat.cmu.edu/R/CRAN
+TORONTO = http://cran.utstat.utoronto.ca
+MIRR = http://probability.ca/cran
+CLOUD = cloud.r-project.org
+BOLKER = http://www.math.mcmaster.ca/bolker/R
+NIMBLE = http://r-nimble.org
 
-Sources += Makefile
+MAINR = $(CRAN)
 
-Ignore += makestuff
-msrepo = https://github.com/dushoff
+######################################################################
 
-## Want to chain and make makestuff if it doesn't exist
-## Compress this ¶ to choose default makestuff route
-Makefile: makestuff/Makefile
-makestuff/Makefile:
-	git clone $(msrepo)/makestuff
-	ls makestuff/Makefile
+## Debian only; fancify later
+Ignore += R.mk
+-include R.mk
 
--include makestuff/os.mk
-
-## -include makestuff/wrapR.mk
-
--include makestuff/git.mk
--include makestuff/visual.mk
--include makestuff/projdir.mk
