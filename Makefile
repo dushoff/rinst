@@ -1,7 +1,7 @@
 ## This is rinst
 
+all: current
 -include target.mk
-all: target
 
 # -include makestuff/perl.def
 
@@ -10,7 +10,9 @@ vim_session:
 
 ######################################################################
 
-current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install matlib.install kdensity.install 
+MV = mv -f
+
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install
 
 # It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
 
@@ -53,6 +55,10 @@ sourcerule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRU
 %.source:
 	 $(sourcerule)
 
+nsrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = FALSE)' | $(R) --vanilla | tee $*.source
+%.ns:
+	 $(nsrule)
+
 ######################################################################
 
 Ignore += *.github
@@ -63,6 +69,8 @@ Ignore += *.github
 shellpipes.github: gituser=dushoff
 
 rRlinks.github: gituser=mac-theobio
+
+ungeviz.github: gituser=wilkelab
 
 ggstance.github: %.github: remotes.install
 	echo 'library(remotes); install_github("lionel-/$*")' | sudo $(R) --vanilla > $@ 
@@ -100,6 +108,9 @@ Ignore += *.bioconductor
 
 ## Special extension from Steve
 
+pcoxtime: doParallel.install foreach.install prodlim.install riskRegression.install PermAlgo.install pec.install RcppArmadillo.install
+
+
 glmmTMB_extend.github:
 	echo 'library(remotes);install_github("glmmTMB/glmmTMB/glmmTMB@extend_emmeans")' | $(R) --vanilla | tee $@ 
 
@@ -136,6 +147,11 @@ broom.install: slider.install
 
 slider.install: vctrs.install
 
+gdtools.install: libcairo2-dev.apt
+
+sf.install: rgdal.install libudunits2-0.apt libudunits2-dev.apt
+rgdal.install: libgdal-dev.apt libproj-dev.apt
+
 ######################################################################
 
 ## Belatedly tracking what I'm installing 2021 Jan 30 (Sat)
@@ -156,6 +172,11 @@ update.%:
 %.rmk:
 	/bin/rm -f $*
 	$(MAKE) $*
+
+Ignore += *.tmp
+%.rmk:
+	$(RM) $* 
+	$(MAKE) $* 
 
 ######################################################################
 
