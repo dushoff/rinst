@@ -39,7 +39,7 @@ MAINR = $(CRAN)
 
 ######################################################################
 
-## Debian only; fancify later
+## cp debian.mk R.mk ##
 Sources += debian.mk
 Ignore += R.mk
 -include R.mk
