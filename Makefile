@@ -12,7 +12,7 @@ vim_session:
 
 MV = mv -f
 
-current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install RVAideMemoire.install
 
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
@@ -103,11 +103,11 @@ ici3d-pkg.install:
 
 Ignore += bioconductor
 bioconductor: BiocManager.install
-	echo 'BiocManager::install(version = "3.12")' | $(R) --vanilla > $@
+	echo 'BiocManager::install(version = "3.13", ask=FALSE)' | $(R) --vanilla > $@
 
 Ignore += *.bioconductor
 %.bioconductor: bioconductor
-	echo 'BiocManager::install("$*")' | $(R) --vanilla > $@
+	echo 'BiocManager::install("$*", version = "3.13")' | $(R) --vanilla > $@
 
 ######################################################################
 
@@ -155,6 +155,11 @@ gdtools.install: libcairo2-dev.apt
 
 sf.install: rgdal.install libudunits2-0.apt libudunits2-dev.apt
 rgdal.install: libgdal-dev.apt libproj-dev.apt
+
+## This seems unavailable
+RVAideMemoire.install: mixOmics.bioconductor
+RVAideMemoire.install: %.install: Makefile
+	$(nsrule)
 
 ######################################################################
 
