@@ -12,7 +12,7 @@ vim_session:
 
 MV = mv -f
 
-current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install
 
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
@@ -56,7 +56,12 @@ aptrule = apt install -y $* | tee $*.apt
 %.apt:
 	$(aptrule)
 
-sourcerule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRUE)' | $(R) --vanilla | tee $*.source
+aggrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRUE)' | $(R) --vanilla | tee $*.source
+%.agg:
+	 $(aggrule)
+
+## Default: c("Depends", "Imports", "LinkingTo")
+sourcerule = echo 'install.packages("$*", repos = "$(MAINR)")' | $(R) --vanilla | tee $*.source
 %.source:
 	 $(sourcerule)
 
@@ -129,6 +134,8 @@ rtFilterEstim.install:
 
 
 ######################################################################
+
+## crancache pacman
 
 Ignore += *.install
 
