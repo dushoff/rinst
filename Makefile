@@ -50,6 +50,9 @@ Ignore += R.mk
 
 ######################################################################
 
+fart:
+	echo $(call lc, FART)
+
 Ignore += *.ppa *.apt *.source
 
 %.ppa: r-cran-%.apt
