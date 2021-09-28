@@ -52,7 +52,8 @@ Ignore += R.mk
 
 Ignore += *.ppa *.apt *.source
 
-%.ppa: r-cran-%.apt ;
+%.ppa: r-cran-%.apt
+	$(Move)
 
 aptrule = apt install -y $* | tee $*.apt
 %.apt:
@@ -141,9 +142,10 @@ rtFilterEstim.install:
 
 Ignore += *.install
 
+## The .apt files are being mishandled; suppress handling for now
 %.install:
-	($(MAKE) $*.ppa && $(MV) $*.apt $@) \
-	|| ($(RM) $*.apt && ($(sourcerule)) && $(MV) $*.source $@) \
+	($(MAKE) $*.ppa && $(MV) $*.ppa $@) \
+	|| ($(RM) $*.ppa && ($(sourcerule)) && $(MV) $*.source $@) \
 	|| ($(RM) $*.source && false)
 
 ######################################################################
