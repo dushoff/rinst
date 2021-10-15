@@ -12,9 +12,9 @@ vim_session:
 
 MV = mv -f
 
-current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install 
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github
 
-dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install
+dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install
 
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
@@ -52,28 +52,27 @@ Ignore += R.mk
 
 ######################################################################
 
-fart:
-	echo $(call lc, FART)
-
 Ignore += *.ppa *.apt *.source
 
 %.ppa: r-cran-%.apt
-	$(Move)
+	$(move)
 
-aptrule = apt install -y $* | tee $*.apt
+aptrule = apt-get install -y ` echo $* | tr '[:upper:]' '[:lower:]' ` && touch $@
 %.apt:
 	$(aptrule)
 
-aggrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRUE)' | $(R) --vanilla | tee $*.source
+## Aggro!
+aggrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRUE)' | $(R) --vanilla && touch $@
 %.agg:
 	 $(aggrule)
 
 ## Default: c("Depends", "Imports", "LinkingTo")
-sourcerule = echo 'install.packages("$*", repos = "$(MAINR)")' | $(R) --vanilla | tee $*.source
+sourcerule = echo 'install.packages("$*", repos = "$(MAINR)")' | $(R) --vanilla && touch $@
 %.source:
 	 $(sourcerule)
 
-nsrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = FALSE)' | $(R) --vanilla | tee $*.source
+## No dependencies
+nsrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = FALSE)' | $(R) --vanilla && touch $@
 %.ns:
 	 $(nsrule)
 
@@ -82,13 +81,15 @@ nsrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = FALSE)'
 Ignore += *.github
 
 %.github:
-	echo 'library(remotes); install_github("$(gituser)/$*")' | $(R) --vanilla | tee $@ 
+	echo 'library(remotes); install_github("$(gituser)/$*")' | $(R) --vanilla && touch $@
 
 shellpipes.github: gituser=dushoff
 
 rRlinks.github: gituser=mac-theobio
 
 ungeviz.github: gituser=wilkelab
+
+streamgraph.github: gituser=hrbrmstr
 
 ggstance.github: %.github: remotes.install
 	echo 'library(remotes); install_github("lionel-/$*")' | sudo $(R) --vanilla > $@ 
@@ -147,10 +148,10 @@ rtFilterEstim.install:
 
 Ignore += *.install
 
-## The .apt files are being mishandled; suppress handling for now
+## I think this is all fixed including downcasing (search tr) 2021 Oct 15 (Fri)
 %.install:
 	($(MAKE) $*.ppa && $(MV) $*.ppa $@) \
-	|| ($(RM) $*.ppa && ($(sourcerule)) && $(MV) $*.source $@) \
+	|| ($(sourcerule)) && $(MV) $*.source $@ \
 	|| ($(RM) $*.source && false)
 
 ######################################################################
