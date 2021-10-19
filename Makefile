@@ -14,7 +14,7 @@ MV = mv -f
 
 current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github
 
-dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install
+dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github
 
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
@@ -67,7 +67,7 @@ aggrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRUE)'
 	 $(aggrule)
 
 ## Default: c("Depends", "Imports", "LinkingTo")
-sourcerule = echo 'install.packages("$*", repos = "$(MAINR)")' | $(R) --vanilla && touch $@
+sourcerule = echo 'install.packages("$*", repos = "$(MAINR)")' | $(R) --vanilla && touch $*.source
 %.source:
 	 $(sourcerule)
 
@@ -82,6 +82,8 @@ Ignore += *.github
 
 %.github:
 	echo 'library(remotes); install_github("$(gituser)/$*")' | $(R) --vanilla && touch $@
+
+d3scatter.github: gituser=jcheng5
 
 shellpipes.github: gituser=dushoff
 
@@ -151,12 +153,14 @@ Ignore += *.install
 ## I think this is all fixed including downcasing (search tr) 2021 Oct 15 (Fri)
 %.install:
 	($(MAKE) $*.ppa && $(MV) $*.ppa $@) \
-	|| ($(sourcerule)) && $(MV) $*.source $@ \
+	|| (($(sourcerule)) && $(MV) $*.source $@) \
 	|| ($(RM) $*.source && false)
 
 ######################################################################
 
 ## Dependencies
+
+gifski.ppa: cargo.apt
 
 GGally.install: rJava.install
 rJava.install: default-jre.apt
