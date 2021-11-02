@@ -14,7 +14,7 @@ MV = mv -f
 
 current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install factoextra.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github ggtext.install
 
-dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github
+dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github threejs.install igraph.install network.install sna.install ggraph.install visNetwork.install networkD3.install ndtv.install
 
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
