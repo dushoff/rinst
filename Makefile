@@ -15,9 +15,9 @@ MV = mv -f
 ## current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github
 current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github ggtext.install
 
-dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github threejs.install igraph.install network.install sna.install ggraph.install visNetwork.install networkD3.install ndtv.install factoextra.install vegan.install andrews.install tourr.install rggobi.install pheatmap.install ggmosaic.install ggeffects.install ggraph.install
+dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github threejs.install igraph.install network.install sna.install ggraph.install visNetwork.install networkD3.install ndtv.install factoextra.install vegan.install andrews.install tourr.install rggobi.install pheatmap.install ggmosaic.install ggeffects.install ggraph.install dichromat.install cividis.github
 
-student: sqldf.install rworldmap.install
+student: sqldf.install rworldmap.install ggplotFL.source
 
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
@@ -44,7 +44,7 @@ CLOUD = cloud.r-project.org
 BOLKER = http://www.math.mcmaster.ca/bolker/R
 NIMBLE = http://r-nimble.org
 
-MAINR = $(CRAN)
+REPO = $(CRAN)
 
 ######################################################################
 
@@ -65,17 +65,17 @@ aptrule = apt-get install -y ` echo $* | tr '[:upper:]' '[:lower:]' ` && touch $
 	$(aptrule)
 
 ## Aggro!
-aggrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = TRUE)' | $(R) --vanilla && touch $@
+aggrule = echo 'install.packages("$*", repos = "$(REPO)", dependencies = TRUE)' | $(R) --vanilla && touch $@
 %.agg:
 	 $(aggrule)
 
 ## Default: c("Depends", "Imports", "LinkingTo")
-sourcerule = echo 'install.packages("$*", repos = "$(MAINR)")' | $(R) --vanilla && touch $*.source
+sourcerule = echo 'install.packages("$*", repos = "$(REPO)")' | $(R) --vanilla && touch $*.source
 %.source:
 	 $(sourcerule)
 
 ## No dependencies
-nsrule = echo 'install.packages("$*", repos = "$(MAINR)", dependencies = FALSE)' | $(R) --vanilla && touch $@
+nsrule = echo 'install.packages("$*", repos = "$(REPO)", dependencies = FALSE)' | $(R) --vanilla && touch $@
 %.ns:
 	 $(nsrule)
 
@@ -96,6 +96,8 @@ ungeviz.github: gituser=wilkelab
 
 streamgraph.github: gituser=hrbrmstr
 
+cividis.github: gituser=marcosci
+
 ggstance.github: %.github: remotes.install
 	echo 'library(remotes); install_github("lionel-/$*")' | sudo $(R) --vanilla > $@ 
 
@@ -104,6 +106,9 @@ githubrule = ($(MAKE) $(@:.install=.github) && $(MV) $(@:.install=.github) $@) \
 
 ######################################################################
 
+ggplotFL.source: REPO = http://flr-project.org/R
+
+######################################################################
 ## Work on modularizing
 
 # Bolker packages
@@ -207,7 +212,7 @@ RVAideMemoire.install: %.install: Makefile
 
 Ignore += update.*
 update.%:
-	 echo 'update.packages(repos = "$(MAINR)", ask=FALSE, checkBuilt=TRUE)' | $(R) --vanilla > $@
+	 echo 'update.packages(repos = "$(REPO)", ask=FALSE, checkBuilt=TRUE)' | $(R) --vanilla > $@
 
 ######################################################################
 
