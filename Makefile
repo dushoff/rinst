@@ -17,7 +17,7 @@ current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.ins
 
 dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github threejs.install igraph.install network.install sna.install ggraph.install visNetwork.install networkD3.install ndtv.install factoextra.install vegan.install andrews.install tourr.install rggobi.install pheatmap.install ggmosaic.install ggeffects.install ggraph.install dichromat.install cividis.github colorBlindness.install ggmap.install
 
-student: sqldf.install rworldmap.install ggplotFL.source shinythemes.source ggpmisc.install sarima.install dynlm.install
+student: sqldf.install rworldmap.install ggplotFL.source shinythemes.source ggpmisc.install sarima.install dynlm.install move.install
 
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
@@ -172,6 +172,7 @@ Ignore += *.install
 
 gifski.ppa: cargo.apt
 
+move.install: rgdal.install
 GGally.install: rJava.install
 rJava.install: default-jre.apt
 
