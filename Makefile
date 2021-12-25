@@ -85,7 +85,7 @@ nsrule = echo 'install.packages("$*", repos = "$(REPO)", dependencies = FALSE)' 
 Ignore += *.github
 
 gforce = FALSE
-%.github:
+%.github: remotes.install
 	echo 'library(remotes); install_github("$(gituser)/$*", force=$(gforce))' | $(R) --vanilla && touch $@
 
 datadrivencv.github: gituser=nstrayer
