@@ -181,7 +181,7 @@ rmarkdown.install: openssl.install
 
 openssl.install: sodium.install libssl-dev.apt
 
-sodium.install: libsodium.apt
+## sodium.install: libsodium.apt
 
 devtools.source: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
 
