@@ -12,7 +12,7 @@ vim_session:
 
 MV = mv -f
 
-current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github ggtext.install datadrivencv.github arm.install VGAM.install rstan.install performance.install TMB.source tidyverse.install haven.install bbmle.install devtools.install bsts.install
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github ggtext.install datadrivencv.github arm.install VGAM.install rstan.install performance.install TMB.source tidyverse.install haven.install bbmle.install devtools.install bsts.install emmeans.install effects.install
 
 macpan: pomp.install Hmisc.install DEoptim.install deSolve.install diagram.install fastmatrix.install semver.install
 
@@ -144,7 +144,7 @@ Ignore += *.bioconductor
 
 pcoxtime: doParallel.install foreach.install prodlim.install riskRegression.install PermAlgo.install pec.install RcppArmadillo.install
 
-glmmTMB_extend.github:
+glmmTMB_extend.github: emmeans.install
 	echo 'library(remotes);install_github("glmmTMB/glmmTMB/glmmTMB@extend_emmeans")' | $(R) --vanilla | tee $@ 
 
 glmmTMB_extend.install:
