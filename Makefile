@@ -12,7 +12,7 @@ vim_session:
 
 MV = mv -f
 
-current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github ggtext.install datadrivencv.github arm.install VGAM.install rstan.install performance.install TMB.source tidyverse.install haven.install bbmle.install devtools.install bsts.install emmeans.install effects.install ggthemes.install Cairo.install openxlsx.install ggdark.install
+current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github ggtext.install datadrivencv.github arm.install VGAM.install rstan.install performance.install TMB.source tidyverse.install haven.install bbmle.install devtools.install bsts.install emmeans.install effects.install ggthemes.install Cairo.install openxlsx.install ggdark.install ragg.install
 
 macpan: pomp.install Hmisc.install DEoptim.install deSolve.install diagram.install fastmatrix.install semver.install
 
@@ -50,9 +50,20 @@ REPO = $(CRAN)
 ######################################################################
 
 ## cp debian.mk R.mk ##
+## Make this a link? Update?
 Sources += debian.mk
 Ignore += R.mk
 -include R.mk
+
+######################################################################
+
+textshaping.install.isallfucked:
+	R CMD INSTALL --configure-vars='INCLUDE_DIR=/usr/include/harfbuzz/'
+	/tmp/RtmpANWJhr/downloaded_packages/
+
+## apt install libfontconfig1-dev pkgconfiglib freetype-dev libfreetype6 libfreetype6-dev
+##         ‘/tmp/RtmpmRc6FB/downloaded_packages’
+#  remotes::install_github('r-lib/systemfonts')
 
 ######################################################################
 
@@ -89,6 +100,8 @@ gforce = FALSE
 	echo 'library(remotes); install_github("$(gituser)/$*", force=$(gforce))' | $(R) --vanilla && touch $@
 
 datadrivencv.github: gituser=nstrayer
+
+systemfonts.github: gituser=r-lib
 
 d3scatter.github: gituser=jcheng5
 
@@ -165,6 +178,7 @@ rtFilterEstim.install:
 Ignore += *.install
 
 ## I think this is all fixed including downcasing (search tr) 2021 Oct 15 (Fri)
+## Seems to be making the target when failing (ragg.install)?
 %.install:
 	($(MAKE) $*.ppa && $(MV) $*.ppa $@) \
 	|| (($(sourcerule)) && $(MV) $*.source $@) \
@@ -188,6 +202,8 @@ openssl.install: sodium.install libssl-dev.apt
 
 ## sodium.install: libsodium.apt
 
+ragg.install: textshaping.install
+textshaping.install: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
 devtools.source: libharfbuzz-dev.apt libfribidi-dev.apt pkgload.install
 
 dotwhisker.install: broomExtra.install
