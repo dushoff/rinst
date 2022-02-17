@@ -16,7 +16,7 @@ current: glmmTMB_extend.github splitstackshape.install caret.install ggrepel.ins
 
 macpan: pomp.install Hmisc.install DEoptim.install deSolve.install diagram.install fastmatrix.install semver.install
 
-dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github threejs.install igraph.install network.install sna.install ggraph.install visNetwork.install networkD3.install ndtv.install factoextra.install vegan.install andrews.install tourr.install rggobi.install pheatmap.install ggmosaic.install ggeffects.install ggraph.install dichromat.install cividis.github colorBlindness.install ggmap.install
+dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github threejs.install igraph.install network.install sna.install ggraph.install visNetwork.install networkD3.install ndtv.install factoextra.install vegan.install andrews.install tourr.install rggobi.install pheatmap.install ggmosaic.install ggeffects.install ggraph.install dichromat.install cividis.github colorBlindness.install ggmap.install palmerpenguins.install ggbeeswarm.install colorblindr.github pander.install
 
 student: sqldf.install rworldmap.install ggplotFL.source shinythemes.source ggpmisc.install sarima.install dynlm.install move.install imputeTS.install
 
@@ -97,6 +97,7 @@ shellpipes.github: gituser=dushoff
 rRlinks.github: gituser=mac-theobio
 
 ungeviz.github: gituser=wilkelab
+colorblindr.github: gituser=clauswilke
 
 streamgraph.github: gituser=hrbrmstr
 
