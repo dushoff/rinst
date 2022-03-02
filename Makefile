@@ -22,11 +22,14 @@ dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install ra
 
 student: sqldf.install rworldmap.install ggplotFL.source shinythemes.source ggpmisc.install sarima.install dynlm.install move.install imputeTS.install
 
+bicko: pacman.install
+
 macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.install bdsmatrix.install zoo.install deSolve.install diagram.install doParallel.install fastmatrix.install
 
 research: formattable.install
 
 performance.install: see.install
+
 
 # It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
 
