@@ -104,7 +104,9 @@ gforce = FALSE
 %.github: | remotes.install
 	echo 'library(remotes); install_github("$(gituser)/$*", force=$(gforce))' | $(R) --vanilla && touch $@
 
+glmnetpostsurv.github: gituser=cygubicko
 satpred.github: gituser=cygubicko
+satpred.github: gbm.install glmnetpostsurv.github pec.install survivalmodels.install
 
 datadrivencv.github: gituser=nstrayer
 
