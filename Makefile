@@ -106,6 +106,7 @@ gforce = FALSE
 
 glmnetpostsurv.github: gituser=cygubicko
 satpred.github: gituser=cygubicko
+satpred.github: gforce=TRUE
 satpred.github: gbm.install glmnetpostsurv.github pec.install survivalmodels.install
 
 datadrivencv.github: gituser=nstrayer
