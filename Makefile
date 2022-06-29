@@ -12,7 +12,9 @@ vim_session:
 
 MV = mv -f
 
+## Merge these ☹
 current: glmmTMB.install glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheets.install shellpipes.github ggtext.install datadrivencv.github arm.install VGAM.install rstan.install performance.install TMB.source tidyverse.install haven.install bbmle.install devtools.install bsts.install emmeans.install effects.install ggthemes.install Cairo.install openxlsx.install ggdark.install ggpubfigs.github emdbook.install satpred.github logitnorm.install margins.install
+current: glmmTMB.install glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheet.install gsheets.install shellpipes.github ggtext.install datadrivencv.github arm.install VGAM.install rstan.install performance.install TMB.source tidyverse.install haven.install bbmle.install devtools.install bsts.install emmeans.install effects.install ggthemes.install Cairo.install openxlsx.install ggdark.install ggpubfigs.github emdbook.install satpred.github logitnorm.install expss.install table1.install kableExtra.install survivalROC.install
 
 trouble: ragg.install
 
