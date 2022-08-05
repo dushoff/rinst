@@ -16,6 +16,8 @@ current: glmmTMB.install glmmTMB_extend.github splitstackshape.install caret.ins
 
 trouble: ragg.install
 
+plague: broom.mixed.install dfoptim.install ggstance.install optimx.install weights.install
+
 macpan: pomp.install Hmisc.install DEoptim.install deSolve.install diagram.install fastmatrix.install semver.install
 
 dataviz: huxtable.install rmarkdown.install ggExtra.install patchwork.install rainbow.install GGally.install rayshader.install hexbin.install agridat.install skimr.install pgmm.install stargazer.install dotwhisker.install hrbrthemes.install tidyquant.install paletteer.install ggstream.install streamgraph.github gtsummary.install gganimate.install wbstats.install gifski.install leaflet.install d3scatter.github threejs.install igraph.install network.install sna.install ggraph.install visNetwork.install networkD3.install ndtv.install factoextra.install vegan.install andrews.install tourr.install rggobi.install pheatmap.install ggmosaic.install ggeffects.install ggraph.install dichromat.install cividis.github colorBlindness.install ggmap.install palmerpenguins.install ggbeeswarm.install colorblindr.github pander.install
