@@ -12,7 +12,8 @@ vim_session:
 
 MV = mv -f
 
-current: glmmTMB.install glmmTMB_extend.github splitstackshape.install caret.install ggrepel.install FactoMineR.install rjags.install R2jags.install ungeviz.github matlib.install kdensity.install latex2exp.install rootSolve.install rtFilterEstim.install date.install remotes.install memoise.install directlabels.install cowplot.install EpiEstim.install egg.install tikzDevice.install lmPerm.install ggpubr.install gsheet.install gsheets.install shellpipes.github ggtext.install datadrivencv.github arm.install VGAM.install rstan.install performance.install TMB.source tidyverse.install haven.install bbmle.install devtools.install bsts.install emmeans.install effects.install ggthemes.install Cairo.install openxlsx.install ggdark.install ggpubfigs.github emdbook.install satpred.github logitnorm.install expss.install table1.install kableExtra.install survivalROC.install
+## alphabetized to merge 2022 Jul 25 (Mon)
+current: arm.install bbmle.install bsts.install Cairo.install caret.install cowplot.install datadrivencv.github date.install devtools.install directlabels.install effects.install egg.install emdbook.install emmeans.install EpiEstim.install expss.install FactoMineR.install ggdark.install ggpubfigs.github ggpubr.install ggrepel.install ggtext.install ggthemes.install glmmTMB_extend.github glmmTMB.install gsheet.install gsheets.install haven.install kableExtra.install kdensity.install latex2exp.install lmPerm.install logitnorm.install margins.install matlib.install memoise.install openxlsx.install performance.install R2jags.install remotes.install rjags.install rootSolve.install rstan.install rtFilterEstim.install satpred.github shellpipes.github splitstackshape.install survivalROC.install table1.install tidyverse.install tikzDevice.install TMB.source ungeviz.github VGAM.install
 
 trouble: ragg.install
 
