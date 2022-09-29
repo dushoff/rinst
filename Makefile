@@ -66,8 +66,7 @@ Ignore += R.mk
 ######################################################################
 
 textshaping.install.isallfucked:
-	R CMD INSTALL --configure-vars='INCLUDE_DIR=/usr/include/harfbuzz/'
-	/tmp/RtmpANWJhr/downloaded_packages/
+	R CMD INSTALL --configure-vars='INCLUDE_DIR=/usr/include/harfbuzz/' /tmp/RtmpANWJhr/downloaded_packages/ textshaping
 
 ## apt install libfontconfig1-dev pkgconfiglib freetype-dev libfreetype6 libfreetype6-dev
 ##         ‘/tmp/RtmpmRc6FB/downloaded_packages’
