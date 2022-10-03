@@ -208,7 +208,9 @@ gifski.ppa: cargo.apt
 
 move.install: rgdal.install
 GGally.install: rJava.install
-rJava.install: default-jre.apt
+rJava.install: default-jre.apt default.jdk.apt
+
+## devtools::install_github('r-lib/systemfonts')
 
 rmarkdown.install: openssl.install
 
@@ -228,7 +230,7 @@ broom.install: slider.install
 
 slider.install: vctrs.install
 
-gdtools.install: libcairo2-dev.apt
+gdtools.install: libcairo2-dev.apt libmagick++-6.q16-dev.apt
 
 sf.install: rgdal.install libudunits2-0.apt libudunits2-dev.apt
 rgdal.install: libgdal-dev.apt libproj-dev.apt
@@ -251,7 +253,8 @@ RVAideMemoire.install: %.install: Makefile
 
 Ignore += update.*
 update.%:
-	 echo 'update.packages(repos = "$(REPO)", ask=FALSE, checkBuilt=TRUE)' | $(R) --vanilla > $@
+	 echo 'update.packages(repos = "$(REPO)", ask=FALSE, checkBuilt=TRUE)' | $(R) --vanilla > $@.temp
+	 mv $@.temp $@
 
 ######################################################################
 
