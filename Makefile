@@ -149,6 +149,10 @@ broom.mixed.github bbmle.github bio3ss3.github fitsir.github: gituser=bbolker
 bbmle.install: 
 	$(githubrule)
 
+knitr.github: gituser=yihui
+
+rmarkdown.github: gituser=rstudio
+
 ######################################################################
 
 ici3d-pkg.github: gituser=ICI3D
