@@ -10,6 +10,11 @@ vim_session:
 
 ######################################################################
 
+all.lst: $(wildcard *.ls)
+	$(cat)
+
+######################################################################
+
 MV = mv -f
 
 ## alphabetized to merge 2022 Jul 25 (Mon)
@@ -32,7 +37,6 @@ macpan_deps: pomp.install bbmle.install Hmisc.install DEoptim.install mvtnorm.in
 research: formattable.install
 
 performance.install: see.install
-
 
 # It is better to only make here _as root_ (don't use sudo).  On new systems, sudo seems to install to the user location. On yushan, sudo _usually_ works fine, but it chokes on jags-y things.
 
