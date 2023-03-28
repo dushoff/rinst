@@ -106,6 +106,9 @@ nsrule = echo 'install.packages("$*", repos = "$(REPO)", dependencies = FALSE)' 
 
 Ignore += *.github
 
+oor.github: gituser=canmod
+macpan2.github: gituser=canmod
+
 gforce = FALSE
 %.github: | remotes.install
 	echo 'library(remotes); install_github("$(gituser)/$*", force=$(gforce))' | $(R) --vanilla && touch $@
@@ -114,6 +117,8 @@ glmnetpostsurv.github: gituser=cygubicko
 satpred.github: gituser=cygubicko
 satpred.github: gforce=TRUE
 satpred.github: gbm.install glmnetpostsurv.github pec.install survivalmodels.install
+
+mp2: oor.github macpan2.github
 
 datadrivencv.github: gituser=nstrayer
 
