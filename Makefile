@@ -1,6 +1,6 @@
 ## This is rinst
 
-all: current target
+ll: current target
 -include target.mk
 
 # -include makestuff/perl.def
